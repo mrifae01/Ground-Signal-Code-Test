@@ -242,11 +242,13 @@ def reconcile(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
 
 
 # ---------------------------------------------------------------------------
-# Main — load, normalize, reconcile, and print summary
+# Main — load, normalize, reconcile, and write output files
 # ---------------------------------------------------------------------------
 
 def main() -> None:
     base = Path(__file__).parent
+    out_dir = base / "output"
+    out_dir.mkdir(exist_ok=True)
 
     print("Loading snapshot 1...")
     df1, issues1 = load_and_clean(base / "data" / "snapshot_1.csv")
@@ -258,15 +260,24 @@ def main() -> None:
 
     print("\nReconciling...")
     report = reconcile(df1, df2)
+    all_issues = issues1 + issues2
 
+    # Write output files
+    report_path = out_dir / "reconciliation_report.csv"
+    issues_path = out_dir / "data_quality_issues.csv"
+
+    report.to_csv(report_path, index=False)
+    pd.DataFrame(all_issues).to_csv(issues_path, index=False)
+
+    # Print summary
     counts = report["status"].value_counts()
     print("\n=== Reconciliation Summary ===")
     for status in ["removed", "added", "quantity_changed", "unchanged"]:
         print(f"  {status:<22}: {counts.get(status, 0)}")
-
-    print("\n=== Data Quality Issues ===")
-    for issue in issues1 + issues2:
-        print(f"  [{issue['source']} row {issue['row']}] {issue['issue']}")
+    print(f"\n  Total data quality issues : {len(all_issues)}")
+    print(f"\nOutputs written to: {out_dir}")
+    print(f"  - {report_path.name}")
+    print(f"  - {issues_path.name}")
 
 
 if __name__ == "__main__":

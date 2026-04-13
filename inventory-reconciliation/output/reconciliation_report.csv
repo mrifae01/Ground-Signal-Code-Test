@@ -1,0 +1,81 @@
+sku,name,location,status,qty_snapshot_1,qty_snapshot_2,qty_delta,last_counted_s1,last_counted_s2
+SKU-025,VGA Cable,Warehouse B,removed,50.0,,,2024-01-08,
+SKU-026,DVI Cable,Warehouse B,removed,35.0,,,2024-01-08,
+SKU-076,Stream Deck Mini,Warehouse A,added,,15.0,,,2024-01-15
+SKU-077,Stream Deck XL,Warehouse A,added,,8.0,,,2024-01-15
+SKU-078,Capture Card,Warehouse A,added,,12.0,,,2024-01-15
+SKU-079,USB-C Hub,Warehouse A,added,,45.0,,,2024-01-15
+SKU-080,Thunderbolt Cable,Warehouse A,added,,30.0,,,2024-01-15
+SKU-001,Widget A,Warehouse A,quantity_changed,150.0,145.0,-5.0,2024-01-08,2024-01-15
+SKU-002,Widget B,Warehouse A,quantity_changed,75.0,70.0,-5.0,2024-01-08,2024-01-15
+SKU-003,Gadget Pro,Warehouse B,quantity_changed,200.0,185.0,-15.0,2024-01-08,2024-01-15
+SKU-004,Gadget Lite,Warehouse A,quantity_changed,50.0,48.0,-2.0,2024-01-08,2024-01-15
+SKU-005,Connector Cable 6ft,Warehouse C,quantity_changed,500.0,480.0,-20.0,2024-01-08,2024-01-15
+SKU-008,Power Supply Unit Pro,Warehouse A,quantity_changed,45.0,42.0,-3.0,2024-01-08,2024-01-15
+SKU-009,Mounting Bracket Small,Warehouse B,quantity_changed,1000.0,975.0,-25.0,2024-01-08,2024-01-15
+SKU-010,Mounting Bracket Large,Warehouse B,quantity_changed,750.0,720.0,-30.0,2024-01-08,2024-01-15
+SKU-011,LED Panel 12x12,Warehouse A,quantity_changed,120.0,115.0,-5.0,2024-01-08,2024-01-15
+SKU-012,LED Panel 24x24,Warehouse A,quantity_changed,90.0,85.0,-5.0,2024-01-08,2024-01-15
+SKU-013,Thermal Paste Tube,Warehouse C,quantity_changed,2000.0,1850.0,-150.0,2024-01-08,2024-01-15
+SKU-014,Cooling Fan 80mm,Warehouse B,quantity_changed,300.0,290.0,-10.0,2024-01-08,2024-01-15
+SKU-015,Cooling Fan 120mm,Warehouse B,quantity_changed,250.0,245.0,-5.0,2024-01-08,2024-01-15
+SKU-016,USB Hub 4-Port,Warehouse A,quantity_changed,180.0,165.0,-15.0,2024-01-08,2024-01-15
+SKU-017,USB Hub 7-Port,Warehouse A,quantity_changed,95.0,88.0,-7.0,2024-01-08,2024-01-15
+SKU-018,Ethernet Cable Cat5,Warehouse C,quantity_changed,800.0,750.0,-50.0,2024-01-08,2024-01-15
+SKU-019,Ethernet Cable Cat6,Warehouse C,quantity_changed,600.0,580.0,-20.0,2024-01-08,2024-01-15
+SKU-020,Ethernet Cable Cat6a,Warehouse C,quantity_changed,400.0,390.0,-10.0,2024-01-08,2024-01-15
+SKU-021,HDMI Cable 3ft,Warehouse A,quantity_changed,450.0,425.0,-25.0,2024-01-08,2024-01-15
+SKU-022,HDMI Cable 6ft,Warehouse A,quantity_changed,380.0,365.0,-15.0,2024-01-08,2024-01-15
+SKU-023,HDMI Cable 10ft,Warehouse A,quantity_changed,220.0,210.0,-10.0,2024-01-08,2024-01-15
+SKU-024,DisplayPort Cable,Warehouse A,quantity_changed,175.0,170.0,-5.0,2024-01-08,2024-01-15
+SKU-027,Audio Cable 3.5mm,Warehouse C,quantity_changed,600.0,575.0,-25.0,2024-01-08,2024-01-15
+SKU-028,Audio Cable RCA,Warehouse C,quantity_changed,400.0,385.0,-15.0,2024-01-08,2024-01-15
+SKU-029,Optical Audio Cable,Warehouse C,quantity_changed,150.0,145.0,-5.0,2024-01-08,2024-01-15
+SKU-030,Surge Protector 6-Outlet,Warehouse A,quantity_changed,200.0,188.0,-12.0,2024-01-08,2024-01-15
+SKU-031,Surge Protector 12-Outlet,Warehouse A,quantity_changed,120.0,112.0,-8.0,2024-01-08,2024-01-15
+SKU-032,Extension Cord 10ft,Warehouse B,quantity_changed,300.0,285.0,-15.0,2024-01-08,2024-01-15
+SKU-033,Extension Cord 25ft,Warehouse B,quantity_changed,180.0,172.0,-8.0,2024-01-08,2024-01-15
+SKU-034,Power Strip,Warehouse A,quantity_changed,250.0,240.0,-10.0,2024-01-08,2024-01-15
+SKU-035,Cable Ties 100pk,Warehouse C,quantity_changed,1500.0,1420.0,-80.0,2024-01-08,2024-01-15
+SKU-036,Cable Ties 500pk,Warehouse C,quantity_changed,400.0,385.0,-15.0,2024-01-08,2024-01-15
+SKU-037,Velcro Straps 50pk,Warehouse C,quantity_changed,800.0,765.0,-35.0,2024-01-08,2024-01-15
+SKU-038,Label Maker,Warehouse A,quantity_changed,25.0,22.0,-3.0,2024-01-08,2024-01-15
+SKU-039,Label Tape,Warehouse A,quantity_changed,200.0,185.0,-15.0,2024-01-08,2024-01-15
+SKU-040,Screwdriver Set,Warehouse B,quantity_changed,150.0,142.0,-8.0,2024-01-08,2024-01-15
+SKU-041,Precision Screwdriver Set,Warehouse B,quantity_changed,100.0,95.0,-5.0,2024-01-08,2024-01-15
+SKU-042,Wire Stripper,Warehouse B,quantity_changed,75.0,70.0,-5.0,2024-01-08,2024-01-15
+SKU-043,Crimping Tool,Warehouse B,quantity_changed,60.0,58.0,-2.0,2024-01-08,2024-01-15
+SKU-044,Multimeter Basic,Warehouse A,quantity_changed,40.0,35.0,-5.0,2024-01-08,2024-01-15
+SKU-045,Multimeter Professional,Warehouse A,quantity_changed,25.0,23.0,-2.0,2024-01-08,2024-01-15
+SKU-046,Soldering Iron,Warehouse B,quantity_changed,35.0,32.0,-3.0,2024-01-08,2024-01-15
+SKU-047,Solder Wire,Warehouse B,quantity_changed,300.0,280.0,-20.0,2024-01-08,2024-01-15
+SKU-048,Heat Shrink Tubing,Warehouse C,quantity_changed,500.0,475.0,-25.0,2024-01-08,2024-01-15
+SKU-049,Electrical Tape,Warehouse C,quantity_changed,800.0,760.0,-40.0,2024-01-08,2024-01-15
+SKU-050,Anti-Static Wrist Strap,Warehouse A,quantity_changed,200.0,190.0,-10.0,2024-01-08,2024-01-15
+SKU-051,Anti-Static Mat,Warehouse A,quantity_changed,50.0,48.0,-2.0,2024-01-08,2024-01-15
+SKU-052,Compressed Air Can,Warehouse C,quantity_changed,400.0,375.0,-25.0,2024-01-08,2024-01-15
+SKU-053,Isopropyl Alcohol 99%,Warehouse C,quantity_changed,150.0,140.0,-10.0,2024-01-08,2024-01-15
+SKU-054,Microfiber Cloth 10pk,Warehouse C,quantity_changed,300.0,285.0,-15.0,2024-01-08,2024-01-15
+SKU-055,Screen Cleaner,Warehouse C,quantity_changed,250.0,235.0,-15.0,2024-01-08,2024-01-15
+SKU-056,Keyboard Cleaner Gel,Warehouse C,quantity_changed,180.0,168.0,-12.0,2024-01-08,2024-01-15
+SKU-057,Monitor Stand,Warehouse A,quantity_changed,45.0,42.0,-3.0,2024-01-08,2024-01-15
+SKU-058,Laptop Stand,Warehouse A,quantity_changed,60.0,58.0,-2.0,2024-01-08,2024-01-15
+SKU-059,Tablet Stand,Warehouse A,quantity_changed,80.0,75.0,-5.0,2024-01-08,2024-01-15
+SKU-060,Phone Stand,Warehouse A,quantity_changed,120.0,115.0,-5.0,2024-01-08,2024-01-15
+SKU-061,Desk Organizer,Warehouse B,quantity_changed,90.0,85.0,-5.0,2024-01-08,2024-01-15
+SKU-062,Cable Management Box,Warehouse B,quantity_changed,110.0,105.0,-5.0,2024-01-08,2024-01-15
+SKU-063,Headphone Hook,Warehouse B,quantity_changed,200.0,192.0,-8.0,2024-01-08,2024-01-15
+SKU-064,Webcam Mount,Warehouse A,quantity_changed,75.0,72.0,-3.0,2024-01-08,2024-01-15
+SKU-065,Ring Light 10in,Warehouse A,quantity_changed,40.0,38.0,-2.0,2024-01-08,2024-01-15
+SKU-066,Ring Light 18in,Warehouse A,quantity_changed,25.0,22.0,-3.0,2024-01-08,2024-01-15
+SKU-067,Tripod Small,Warehouse B,quantity_changed,55.0,52.0,-3.0,2024-01-08,2024-01-15
+SKU-068,Tripod Large,Warehouse B,quantity_changed,35.0,33.0,-2.0,2024-01-08,2024-01-15
+SKU-069,Green Screen,Warehouse A,quantity_changed,20.0,18.0,-2.0,2024-01-08,2024-01-15
+SKU-070,Backdrop Stand,Warehouse A,quantity_changed,15.0,12.0,-3.0,2024-01-08,2024-01-15
+SKU-071,USB Microphone,Warehouse A,quantity_changed,30.0,28.0,-2.0,2024-01-08,2024-01-15
+SKU-072,XLR Microphone,Warehouse A,quantity_changed,20.0,18.0,-2.0,2024-01-08,2024-01-15
+SKU-073,Pop Filter,Warehouse B,quantity_changed,100.0,95.0,-5.0,2024-01-08,2024-01-15
+SKU-074,Boom Arm,Warehouse B,quantity_changed,45.0,42.0,-3.0,2024-01-08,2024-01-15
+SKU-075,Shock Mount,Warehouse B,quantity_changed,40.0,38.0,-2.0,2024-01-08,2024-01-15
+SKU-006,Connector Cable 10ft,Warehouse C,unchanged,350.0,350.0,0.0,2024-01-08,2024-01-15
+SKU-007,Power Supply Unit,Warehouse A,unchanged,80.0,80.0,0.0,2024-01-08,2024-01-15
