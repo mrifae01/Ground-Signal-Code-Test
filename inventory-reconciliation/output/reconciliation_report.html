@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventory Reconciliation Report</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #fafafa; color: #212121; padding: 32px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  .subtitle { color: #757575; font-size: 0.9rem; margin-bottom: 28px; }
+  h2 { font-size: 1.1rem; margin: 32px 0 12px; color: #424242; border-bottom: 1px solid #e0e0e0; padding-bottom: 6px; }
+  .cards { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+  .card { padding: 16px 24px; border-radius: 8px; min-width: 140px; }
+  .card-count { font-size: 2rem; font-weight: 700; }
+  .card-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  th { background: #424242; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+  td { padding: 8px 12px; border-bottom: 1px solid rgba(0,0,0,0.06); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  code { font-size: 0.82rem; background: rgba(0,0,0,0.06); padding: 1px 5px; border-radius: 3px; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<h1>Inventory Reconciliation Report</h1>
+<p class="subtitle">snapshot_1.csv (2024-01-08) vs snapshot_2.csv (2024-01-15)</p>
+
+<h2>Summary</h2>
+<div class="cards">
+        <div class="card" style="background:#fdecea; border-left: 4px solid #c62828;">
+            <div class="card-count" style="color:#c62828;">2</div>
+            <div class="card-label">Removed</div>
+        </div>
+        <div class="card" style="background:#e8f5e9; border-left: 4px solid #2e7d32;">
+            <div class="card-count" style="color:#2e7d32;">5</div>
+            <div class="card-label">Added</div>
+        </div>
+        <div class="card" style="background:#fff8e1; border-left: 4px solid #f57f17;">
+            <div class="card-count" style="color:#f57f17;">71</div>
+            <div class="card-label">Qty Changed</div>
+        </div>
+        <div class="card" style="background:#f5f5f5; border-left: 4px solid #616161;">
+            <div class="card-count" style="color:#616161;">2</div>
+            <div class="card-label">Unchanged</div>
+        </div>
+</div>
+
+<h2>Reconciliation (80 items)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>SKU</th><th>Name</th><th>Location</th><th>Status</th>
+      <th style="text-align:right;">Qty S1</th>
+      <th style="text-align:right;">Qty S2</th>
+      <th style="text-align:right;">Delta</th>
+      <th>Last Counted S1</th><th>Last Counted S2</th>
+    </tr>
+  </thead>
+  <tbody>
+        <tr style="background:#fdecea;">
+            <td><code>SKU-025</code></td>
+            <td>VGA Cable</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#c62828; color:#fff;">Removed</span></td>
+            <td style="text-align:right;">50</td>
+            <td style="text-align:right;">—</td>
+            <td style="text-align:right;">—</td>
+            <td>2024-01-08</td>
+            <td>—</td>
+        </tr>
+        <tr style="background:#fdecea;">
+            <td><code>SKU-026</code></td>
+            <td>DVI Cable</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#c62828; color:#fff;">Removed</span></td>
+            <td style="text-align:right;">35</td>
+            <td style="text-align:right;">—</td>
+            <td style="text-align:right;">—</td>
+            <td>2024-01-08</td>
+            <td>—</td>
+        </tr>
+        <tr style="background:#e8f5e9;">
+            <td><code>SKU-076</code></td>
+            <td>Stream Deck Mini</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#2e7d32; color:#fff;">Added</span></td>
+            <td style="text-align:right;">—</td>
+            <td style="text-align:right;">15</td>
+            <td style="text-align:right;">—</td>
+            <td>—</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#e8f5e9;">
+            <td><code>SKU-077</code></td>
+            <td>Stream Deck XL</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#2e7d32; color:#fff;">Added</span></td>
+            <td style="text-align:right;">—</td>
+            <td style="text-align:right;">8</td>
+            <td style="text-align:right;">—</td>
+            <td>—</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#e8f5e9;">
+            <td><code>SKU-078</code></td>
+            <td>Capture Card</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#2e7d32; color:#fff;">Added</span></td>
+            <td style="text-align:right;">—</td>
+            <td style="text-align:right;">12</td>
+            <td style="text-align:right;">—</td>
+            <td>—</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#e8f5e9;">
+            <td><code>SKU-079</code></td>
+            <td>USB-C Hub</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#2e7d32; color:#fff;">Added</span></td>
+            <td style="text-align:right;">—</td>
+            <td style="text-align:right;">45</td>
+            <td style="text-align:right;">—</td>
+            <td>—</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#e8f5e9;">
+            <td><code>SKU-080</code></td>
+            <td>Thunderbolt Cable</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#2e7d32; color:#fff;">Added</span></td>
+            <td style="text-align:right;">—</td>
+            <td style="text-align:right;">30</td>
+            <td style="text-align:right;">—</td>
+            <td>—</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-001</code></td>
+            <td>Widget A</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">150</td>
+            <td style="text-align:right;">145</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-5</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-002</code></td>
+            <td>Widget B</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">75</td>
+            <td style="text-align:right;">70</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-5</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-003</code></td>
+            <td>Gadget Pro</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">200</td>
+            <td style="text-align:right;">185</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-15</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-004</code></td>
+            <td>Gadget Lite</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">50</td>
+            <td style="text-align:right;">48</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-2</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-005</code></td>
+            <td>Connector Cable 6ft</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">500</td>
+            <td style="text-align:right;">480</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-20</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-008</code></td>
+            <td>Power Supply Unit Pro</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">45</td>
+            <td style="text-align:right;">42</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-3</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-009</code></td>
+            <td>Mounting Bracket Small</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">1000</td>
+            <td style="text-align:right;">975</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-25</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-010</code></td>
+            <td>Mounting Bracket Large</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">750</td>
+            <td style="text-align:right;">720</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-30</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-011</code></td>
+            <td>LED Panel 12x12</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">120</td>
+            <td style="text-align:right;">115</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-5</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-012</code></td>
+            <td>LED Panel 24x24</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">90</td>
+            <td style="text-align:right;">85</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-5</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-013</code></td>
+            <td>Thermal Paste Tube</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">2000</td>
+            <td style="text-align:right;">1850</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-150</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-014</code></td>
+            <td>Cooling Fan 80mm</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">300</td>
+            <td style="text-align:right;">290</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-10</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-015</code></td>
+            <td>Cooling Fan 120mm</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">250</td>
+            <td style="text-align:right;">245</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-5</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-016</code></td>
+            <td>USB Hub 4-Port</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">180</td>
+            <td style="text-align:right;">165</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-15</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-017</code></td>
+            <td>USB Hub 7-Port</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">95</td>
+            <td style="text-align:right;">88</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-7</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-018</code></td>
+            <td>Ethernet Cable Cat5</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">800</td>
+            <td style="text-align:right;">750</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-50</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-019</code></td>
+            <td>Ethernet Cable Cat6</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">600</td>
+            <td style="text-align:right;">580</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-20</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-020</code></td>
+            <td>Ethernet Cable Cat6a</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">400</td>
+            <td style="text-align:right;">390</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-10</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-021</code></td>
+            <td>HDMI Cable 3ft</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">450</td>
+            <td style="text-align:right;">425</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-25</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-022</code></td>
+            <td>HDMI Cable 6ft</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">380</td>
+            <td style="text-align:right;">365</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-15</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-023</code></td>
+            <td>HDMI Cable 10ft</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">220</td>
+            <td style="text-align:right;">210</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-10</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-024</code></td>
+            <td>DisplayPort Cable</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">175</td>
+            <td style="text-align:right;">170</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-5</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-027</code></td>
+            <td>Audio Cable 3.5mm</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">600</td>
+            <td style="text-align:right;">575</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-25</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-028</code></td>
+            <td>Audio Cable RCA</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">400</td>
+            <td style="text-align:right;">385</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-15</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-029</code></td>
+            <td>Optical Audio Cable</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">150</td>
+            <td style="text-align:right;">145</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-5</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-030</code></td>
+            <td>Surge Protector 6-Outlet</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">200</td>
+            <td style="text-align:right;">188</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-12</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-031</code></td>
+            <td>Surge Protector 12-Outlet</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">120</td>
+            <td style="text-align:right;">112</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-8</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-032</code></td>
+            <td>Extension Cord 10ft</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">300</td>
+            <td style="text-align:right;">285</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-15</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-033</code></td>
+            <td>Extension Cord 25ft</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">180</td>
+            <td style="text-align:right;">172</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-8</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-034</code></td>
+            <td>Power Strip</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">250</td>
+            <td style="text-align:right;">240</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-10</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-035</code></td>
+            <td>Cable Ties 100pk</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">1500</td>
+            <td style="text-align:right;">1420</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-80</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-036</code></td>
+            <td>Cable Ties 500pk</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">400</td>
+            <td style="text-align:right;">385</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-15</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-037</code></td>
+            <td>Velcro Straps 50pk</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">800</td>
+            <td style="text-align:right;">765</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-35</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-038</code></td>
+            <td>Label Maker</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">25</td>
+            <td style="text-align:right;">22</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-3</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-039</code></td>
+            <td>Label Tape</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">200</td>
+            <td style="text-align:right;">185</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-15</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-040</code></td>
+            <td>Screwdriver Set</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">150</td>
+            <td style="text-align:right;">142</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-8</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-041</code></td>
+            <td>Precision Screwdriver Set</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">100</td>
+            <td style="text-align:right;">95</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-5</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-042</code></td>
+            <td>Wire Stripper</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">75</td>
+            <td style="text-align:right;">70</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-5</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-043</code></td>
+            <td>Crimping Tool</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">60</td>
+            <td style="text-align:right;">58</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-2</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-044</code></td>
+            <td>Multimeter Basic</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">40</td>
+            <td style="text-align:right;">35</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-5</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-045</code></td>
+            <td>Multimeter Professional</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">25</td>
+            <td style="text-align:right;">23</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-2</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-046</code></td>
+            <td>Soldering Iron</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">35</td>
+            <td style="text-align:right;">32</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-3</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-047</code></td>
+            <td>Solder Wire</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">300</td>
+            <td style="text-align:right;">280</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-20</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-048</code></td>
+            <td>Heat Shrink Tubing</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">500</td>
+            <td style="text-align:right;">475</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-25</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-049</code></td>
+            <td>Electrical Tape</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">800</td>
+            <td style="text-align:right;">760</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-40</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-050</code></td>
+            <td>Anti-Static Wrist Strap</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">200</td>
+            <td style="text-align:right;">190</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-10</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-051</code></td>
+            <td>Anti-Static Mat</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">50</td>
+            <td style="text-align:right;">48</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-2</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-052</code></td>
+            <td>Compressed Air Can</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">400</td>
+            <td style="text-align:right;">375</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-25</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-053</code></td>
+            <td>Isopropyl Alcohol 99%</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">150</td>
+            <td style="text-align:right;">140</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-10</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-054</code></td>
+            <td>Microfiber Cloth 10pk</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">300</td>
+            <td style="text-align:right;">285</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-15</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-055</code></td>
+            <td>Screen Cleaner</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">250</td>
+            <td style="text-align:right;">235</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-15</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-056</code></td>
+            <td>Keyboard Cleaner Gel</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">180</td>
+            <td style="text-align:right;">168</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-12</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-057</code></td>
+            <td>Monitor Stand</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">45</td>
+            <td style="text-align:right;">42</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-3</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-058</code></td>
+            <td>Laptop Stand</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">60</td>
+            <td style="text-align:right;">58</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-2</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-059</code></td>
+            <td>Tablet Stand</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">80</td>
+            <td style="text-align:right;">75</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-5</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-060</code></td>
+            <td>Phone Stand</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">120</td>
+            <td style="text-align:right;">115</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-5</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-061</code></td>
+            <td>Desk Organizer</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">90</td>
+            <td style="text-align:right;">85</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-5</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-062</code></td>
+            <td>Cable Management Box</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">110</td>
+            <td style="text-align:right;">105</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-5</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-063</code></td>
+            <td>Headphone Hook</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">200</td>
+            <td style="text-align:right;">192</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-8</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-064</code></td>
+            <td>Webcam Mount</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">75</td>
+            <td style="text-align:right;">72</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-3</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-065</code></td>
+            <td>Ring Light 10in</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">40</td>
+            <td style="text-align:right;">38</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-2</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-066</code></td>
+            <td>Ring Light 18in</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">25</td>
+            <td style="text-align:right;">22</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-3</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-067</code></td>
+            <td>Tripod Small</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">55</td>
+            <td style="text-align:right;">52</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-3</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-068</code></td>
+            <td>Tripod Large</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">35</td>
+            <td style="text-align:right;">33</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-2</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-069</code></td>
+            <td>Green Screen</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">20</td>
+            <td style="text-align:right;">18</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-2</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-070</code></td>
+            <td>Backdrop Stand</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">15</td>
+            <td style="text-align:right;">12</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-3</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-071</code></td>
+            <td>USB Microphone</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">30</td>
+            <td style="text-align:right;">28</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-2</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-072</code></td>
+            <td>XLR Microphone</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">20</td>
+            <td style="text-align:right;">18</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-2</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-073</code></td>
+            <td>Pop Filter</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">100</td>
+            <td style="text-align:right;">95</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-5</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-074</code></td>
+            <td>Boom Arm</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">45</td>
+            <td style="text-align:right;">42</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-3</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#fff8e1;">
+            <td><code>SKU-075</code></td>
+            <td>Shock Mount</td>
+            <td>Warehouse B</td>
+            <td><span class="badge" style="background:#f57f17; color:#fff;">Qty Changed</span></td>
+            <td style="text-align:right;">40</td>
+            <td style="text-align:right;">38</td>
+            <td style="text-align:right;"><span style="color:#c62828;">-2</span></td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#f5f5f5;">
+            <td><code>SKU-006</code></td>
+            <td>Connector Cable 10ft</td>
+            <td>Warehouse C</td>
+            <td><span class="badge" style="background:#616161; color:#fff;">Unchanged</span></td>
+            <td style="text-align:right;">350</td>
+            <td style="text-align:right;">350</td>
+            <td style="text-align:right;">0</td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+        <tr style="background:#f5f5f5;">
+            <td><code>SKU-007</code></td>
+            <td>Power Supply Unit</td>
+            <td>Warehouse A</td>
+            <td><span class="badge" style="background:#616161; color:#fff;">Unchanged</span></td>
+            <td style="text-align:right;">80</td>
+            <td style="text-align:right;">80</td>
+            <td style="text-align:right;">0</td>
+            <td>2024-01-08</td>
+            <td>2024-01-15</td>
+        </tr>
+  </tbody>
+</table>
+
+<h2>Data Quality Issues (13 found)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Source</th><th>Row</th><th>Field</th>
+      <th>Raw Value</th><th>Normalized</th><th>Issue</th>
+    </tr>
+  </thead>
+  <tbody>
+        <tr>
+            <td><code>snapshot_1.csv</code></td>
+            <td style="text-align:center;">36</td>
+            <td><code>name</code></td>
+            <td><code>'Cable Ties 100pk '</code></td>
+            <td><code>'Cable Ties 100pk'</code></td>
+            <td>Whitespace stripped from 'name'</td>
+        </tr>
+        <tr>
+            <td><code>snapshot_1.csv</code></td>
+            <td style="text-align:center;">53</td>
+            <td><code>name</code></td>
+            <td><code>' Compressed Air Can'</code></td>
+            <td><code>'Compressed Air Can'</code></td>
+            <td>Whitespace stripped from 'name'</td>
+        </tr>
+        <tr>
+            <td><code>snapshot_2.csv</code></td>
+            <td style="text-align:center;">6</td>
+            <td><code>sku</code></td>
+            <td><code>SKU005</code></td>
+            <td><code>SKU-005</code></td>
+            <td>Malformed SKU 'SKU005' normalized to 'SKU-005'</td>
+        </tr>
+        <tr>
+            <td><code>snapshot_2.csv</code></td>
+            <td style="text-align:center;">9</td>
+            <td><code>sku</code></td>
+            <td><code>sku-008</code></td>
+            <td><code>SKU-008</code></td>
+            <td>Malformed SKU 'sku-008' normalized to 'SKU-008'</td>
+        </tr>
+        <tr>
+            <td><code>snapshot_2.csv</code></td>
+            <td style="text-align:center;">19</td>
+            <td><code>sku</code></td>
+            <td><code>SKU018</code></td>
+            <td><code>SKU-018</code></td>
+            <td>Malformed SKU 'SKU018' normalized to 'SKU-018'</td>
+        </tr>
+        <tr>
+            <td><code>snapshot_2.csv</code></td>
+            <td style="text-align:center;">3</td>
+            <td><code>name</code></td>
+            <td><code>' Widget B'</code></td>
+            <td><code>'Widget B'</code></td>
+            <td>Whitespace stripped from 'name'</td>
+        </tr>
+        <tr>
+            <td><code>snapshot_2.csv</code></td>
+            <td style="text-align:center;">11</td>
+            <td><code>name</code></td>
+            <td><code>'Mounting Bracket Large '</code></td>
+            <td><code>'Mounting Bracket Large'</code></td>
+            <td>Whitespace stripped from 'name'</td>
+        </tr>
+        <tr>
+            <td><code>snapshot_2.csv</code></td>
+            <td style="text-align:center;">22</td>
+            <td><code>name</code></td>
+            <td><code>' HDMI Cable 3ft '</code></td>
+            <td><code>'HDMI Cable 3ft'</code></td>
+            <td>Whitespace stripped from 'name'</td>
+        </tr>
+        <tr>
+            <td><code>snapshot_2.csv</code></td>
+            <td style="text-align:center;">3</td>
+            <td><code>quantity</code></td>
+            <td><code>70.0</code></td>
+            <td><code>70</code></td>
+            <td>Float quantity '70.0' converted to int</td>
+        </tr>
+        <tr>
+            <td><code>snapshot_2.csv</code></td>
+            <td style="text-align:center;">8</td>
+            <td><code>quantity</code></td>
+            <td><code>80.00</code></td>
+            <td><code>80</code></td>
+            <td>Float quantity '80.00' converted to int</td>
+        </tr>
+        <tr>
+            <td><code>snapshot_2.csv</code></td>
+            <td style="text-align:center;">54</td>
+            <td><code>quantity</code></td>
+            <td><code>-5</code></td>
+            <td><code>—</code></td>
+            <td>Negative quantity '-5' — row excluded</td>
+        </tr>
+        <tr>
+            <td><code>snapshot_2.csv</code></td>
+            <td style="text-align:center;">34</td>
+            <td><code>last_counted</code></td>
+            <td><code>01/15/2024</code></td>
+            <td><code>2024-01-15</code></td>
+            <td>Non-standard date '01/15/2024' normalized to '2024-01-15'</td>
+        </tr>
+        <tr>
+            <td><code>snapshot_2.csv</code></td>
+            <td style="text-align:center;">[44, 54]</td>
+            <td><code>sku</code></td>
+            <td><code>SKU-045</code></td>
+            <td><code>—</code></td>
+            <td>Duplicate SKU 'SKU-045' appears 2 times — keeping first occurrence</td>
+        </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

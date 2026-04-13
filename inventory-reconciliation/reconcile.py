@@ -247,6 +247,152 @@ def reconcile(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
 
 
 # ---------------------------------------------------------------------------
+# HTML Report
+# ---------------------------------------------------------------------------
+
+def generate_html_report(report: pd.DataFrame, issues: list[dict], out_path: Path) -> None:
+    """Generate a self-contained HTML report with summary, reconciliation table, and issues."""
+
+    STATUS_COLORS = {
+        "removed":          ("#fdecea", "#c62828"),
+        "added":            ("#e8f5e9", "#2e7d32"),
+        "quantity_changed": ("#fff8e1", "#f57f17"),
+        "unchanged":        ("#f5f5f5", "#616161"),
+    }
+    STATUS_LABELS = {
+        "removed":          "Removed",
+        "added":            "Added",
+        "quantity_changed": "Qty Changed",
+        "unchanged":        "Unchanged",
+    }
+
+    counts = report["status"].value_counts()
+
+    # --- Summary cards ---
+    cards_html = ""
+    for status, label in STATUS_LABELS.items():
+        bg, fg = STATUS_COLORS[status]
+        n = counts.get(status, 0)
+        cards_html += f"""
+        <div class="card" style="background:{bg}; border-left: 4px solid {fg};">
+            <div class="card-count" style="color:{fg};">{n}</div>
+            <div class="card-label">{label}</div>
+        </div>"""
+
+    # --- Reconciliation table rows ---
+    report_rows_html = ""
+    for _, row in report.iterrows():
+        bg, fg = STATUS_COLORS.get(row["status"], ("#fff", "#000"))
+        delta = row["qty_delta"]
+        if delta is None or (isinstance(delta, float) and pd.isna(delta)):
+            delta_str = "—"
+        elif delta > 0:
+            delta_str = f'<span style="color:#2e7d32;">+{int(delta)}</span>'
+        elif delta < 0:
+            delta_str = f'<span style="color:#c62828;">{int(delta)}</span>'
+        else:
+            delta_str = "0"
+
+        qty_s1 = "—" if pd.isna(row["qty_snapshot_1"]) else int(row["qty_snapshot_1"])
+        qty_s2 = "—" if pd.isna(row["qty_snapshot_2"]) else int(row["qty_snapshot_2"])
+        lc_s1  = "—" if pd.isna(row["last_counted_s1"]) else row["last_counted_s1"]
+        lc_s2  = "—" if pd.isna(row["last_counted_s2"]) else row["last_counted_s2"]
+
+        badge = f'<span class="badge" style="background:{fg}; color:#fff;">{STATUS_LABELS[row["status"]]}</span>'
+
+        report_rows_html += f"""
+        <tr style="background:{bg};">
+            <td><code>{row["sku"]}</code></td>
+            <td>{row["name"]}</td>
+            <td>{row["location"]}</td>
+            <td>{badge}</td>
+            <td style="text-align:right;">{qty_s1}</td>
+            <td style="text-align:right;">{qty_s2}</td>
+            <td style="text-align:right;">{delta_str}</td>
+            <td>{lc_s1}</td>
+            <td>{lc_s2}</td>
+        </tr>"""
+
+    # --- Issues table rows ---
+    issues_rows_html = ""
+    for issue in issues:
+        issues_rows_html += f"""
+        <tr>
+            <td><code>{issue["source"]}</code></td>
+            <td style="text-align:center;">{issue["row"]}</td>
+            <td><code>{issue["field"]}</code></td>
+            <td><code>{issue["raw_value"]}</code></td>
+            <td><code>{issue["normalized_value"] if issue["normalized_value"] is not None else "—"}</code></td>
+            <td>{issue["issue"]}</td>
+        </tr>"""
+
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventory Reconciliation Report</title>
+<style>
+  * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+  body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #fafafa; color: #212121; padding: 32px; }}
+  h1 {{ font-size: 1.6rem; margin-bottom: 4px; }}
+  .subtitle {{ color: #757575; font-size: 0.9rem; margin-bottom: 28px; }}
+  h2 {{ font-size: 1.1rem; margin: 32px 0 12px; color: #424242; border-bottom: 1px solid #e0e0e0; padding-bottom: 6px; }}
+  .cards {{ display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }}
+  .card {{ padding: 16px 24px; border-radius: 8px; min-width: 140px; }}
+  .card-count {{ font-size: 2rem; font-weight: 700; }}
+  .card-label {{ font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }}
+  table {{ width: 100%; border-collapse: collapse; font-size: 0.85rem; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }}
+  th {{ background: #424242; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }}
+  td {{ padding: 8px 12px; border-bottom: 1px solid rgba(0,0,0,0.06); vertical-align: middle; }}
+  tr:last-child td {{ border-bottom: none; }}
+  code {{ font-size: 0.82rem; background: rgba(0,0,0,0.06); padding: 1px 5px; border-radius: 3px; }}
+  .badge {{ display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }}
+</style>
+</head>
+<body>
+
+<h1>Inventory Reconciliation Report</h1>
+<p class="subtitle">snapshot_1.csv (2024-01-08) vs snapshot_2.csv (2024-01-15)</p>
+
+<h2>Summary</h2>
+<div class="cards">{cards_html}
+</div>
+
+<h2>Reconciliation ({len(report)} items)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>SKU</th><th>Name</th><th>Location</th><th>Status</th>
+      <th style="text-align:right;">Qty S1</th>
+      <th style="text-align:right;">Qty S2</th>
+      <th style="text-align:right;">Delta</th>
+      <th>Last Counted S1</th><th>Last Counted S2</th>
+    </tr>
+  </thead>
+  <tbody>{report_rows_html}
+  </tbody>
+</table>
+
+<h2>Data Quality Issues ({len(issues)} found)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Source</th><th>Row</th><th>Field</th>
+      <th>Raw Value</th><th>Normalized</th><th>Issue</th>
+    </tr>
+  </thead>
+  <tbody>{issues_rows_html}
+  </tbody>
+</table>
+
+</body>
+</html>"""
+
+    out_path.write_text(html, encoding="utf-8")
+
+
+# ---------------------------------------------------------------------------
 # Main — load, normalize, reconcile, and write output files
 # ---------------------------------------------------------------------------
 
@@ -271,8 +417,11 @@ def main() -> None:
     report_path = out_dir / "reconciliation_report.csv"
     issues_path = out_dir / "data_quality_issues.csv"
 
+    html_path = out_dir / "reconciliation_report.html"
+
     report.to_csv(report_path, index=False)
     pd.DataFrame(all_issues).to_csv(issues_path, index=False)
+    generate_html_report(report, all_issues, html_path)
 
     # Print summary
     counts = report["status"].value_counts()
@@ -283,6 +432,7 @@ def main() -> None:
     print(f"\nOutputs written to: {out_dir}")
     print(f"  - {report_path.name}")
     print(f"  - {issues_path.name}")
+    print(f"  - {html_path.name}")
 
 
 if __name__ == "__main__":

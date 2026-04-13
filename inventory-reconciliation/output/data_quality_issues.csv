@@ -7,6 +7,8 @@ snapshot_2.csv,19,sku,SKU018,SKU-018,Malformed SKU 'SKU018' normalized to 'SKU-0
 snapshot_2.csv,3,name,' Widget B','Widget B',Whitespace stripped from 'name'
 snapshot_2.csv,11,name,'Mounting Bracket Large ','Mounting Bracket Large',Whitespace stripped from 'name'
 snapshot_2.csv,22,name,' HDMI Cable 3ft ','HDMI Cable 3ft',Whitespace stripped from 'name'
+snapshot_2.csv,3,quantity,70.0,70,Float quantity '70.0' converted to int
+snapshot_2.csv,8,quantity,80.00,80,Float quantity '80.00' converted to int
 snapshot_2.csv,54,quantity,-5,,Negative quantity '-5' — row excluded
 snapshot_2.csv,34,last_counted,01/15/2024,2024-01-15,Non-standard date '01/15/2024' normalized to '2024-01-15'
 snapshot_2.csv,"[44, 54]",sku,SKU-045,,Duplicate SKU 'SKU-045' appears 2 times — keeping first occurrence
