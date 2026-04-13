@@ -178,7 +178,71 @@ def load_and_clean(
 
 
 # ---------------------------------------------------------------------------
-# Main — load and print summary of what was cleaned
+# Reconciliation
+# ---------------------------------------------------------------------------
+
+def reconcile(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
+    """
+    Merge two normalized snapshots on SKU and classify each item as:
+      - unchanged         : in both snapshots, quantity the same
+      - quantity_changed  : in both snapshots, quantity differs
+      - removed           : only in snapshot_1 (sold out / delisted)
+      - added             : only in snapshot_2 (new product)
+    """
+    cols = ["sku", "name", "quantity", "location", "last_counted"]
+    merged = pd.merge(
+        df1[cols], df2[cols],
+        on="sku",
+        how="outer",
+        suffixes=("_s1", "_s2"),
+    )
+
+    records = []
+    for _, row in merged.iterrows():
+        in_s1 = pd.notna(row["quantity_s1"])
+        in_s2 = pd.notna(row["quantity_s2"])
+
+        if in_s1 and in_s2:
+            qty_s1 = int(row["quantity_s1"])
+            qty_s2 = int(row["quantity_s2"])
+            delta = qty_s2 - qty_s1
+            status = "quantity_changed" if delta != 0 else "unchanged"
+        elif in_s1:
+            qty_s1, qty_s2, delta = int(row["quantity_s1"]), None, None
+            status = "removed"
+        else:
+            qty_s1, qty_s2, delta = None, int(row["quantity_s2"]), None
+            status = "added"
+
+        # Prefer snapshot_2 values for matched items (most current)
+        name = row["name_s2"] if pd.notna(row.get("name_s2")) else row["name_s1"]
+        location = row["location_s2"] if pd.notna(row.get("location_s2")) else row["location_s1"]
+
+        records.append({
+            "sku": row["sku"],
+            "name": name,
+            "location": location,
+            "status": status,
+            "qty_snapshot_1": qty_s1,
+            "qty_snapshot_2": qty_s2,
+            "qty_delta": delta,
+            "last_counted_s1": row.get("last_counted_s1"),
+            "last_counted_s2": row.get("last_counted_s2"),
+        })
+
+    result = pd.DataFrame(records)
+    sort_order = {"removed": 0, "added": 1, "quantity_changed": 2, "unchanged": 3}
+    result["_sort"] = result["status"].map(sort_order)
+    result = (
+        result.sort_values(["_sort", "sku"])
+        .drop(columns="_sort")
+        .reset_index(drop=True)
+    )
+    return result
+
+
+# ---------------------------------------------------------------------------
+# Main — load, normalize, reconcile, and print summary
 # ---------------------------------------------------------------------------
 
 def main() -> None:
@@ -191,6 +255,14 @@ def main() -> None:
     print("Loading snapshot 2...")
     df2, issues2 = load_and_clean(base / "data" / "snapshot_2.csv", rename=SNAPSHOT_2_RENAME)
     print(f"  {len(df2)} valid rows, {len(issues2)} issues found")
+
+    print("\nReconciling...")
+    report = reconcile(df1, df2)
+
+    counts = report["status"].value_counts()
+    print("\n=== Reconciliation Summary ===")
+    for status in ["removed", "added", "quantity_changed", "unchanged"]:
+        print(f"  {status:<22}: {counts.get(status, 0)}")
 
     print("\n=== Data Quality Issues ===")
     for issue in issues1 + issues2:
