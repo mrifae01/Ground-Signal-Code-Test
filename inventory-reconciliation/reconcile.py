@@ -144,7 +144,7 @@ def load_and_clean(
             continue
 
         as_int = int(as_float)
-        if as_float != float(as_int):
+        if "." in s:
             issues.append(_make_issue(
                 source, i + 2, "quantity", s, as_int,
                 f"Float quantity '{s}' converted to int"
@@ -229,6 +229,11 @@ def reconcile(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
             "last_counted_s1": row.get("last_counted_s1"),
             "last_counted_s2": row.get("last_counted_s2"),
         })
+
+    if not records:
+        return pd.DataFrame(columns=["sku", "name", "location", "status",
+                                     "qty_snapshot_1", "qty_snapshot_2", "qty_delta",
+                                     "last_counted_s1", "last_counted_s2"])
 
     result = pd.DataFrame(records)
     sort_order = {"removed": 0, "added": 1, "quantity_changed": 2, "unchanged": 3}
